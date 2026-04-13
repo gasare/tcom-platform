@@ -30,8 +30,38 @@ body {
     background-color: var(--bg-primary);
     color: var(--text-pure);
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow: hidden; /* Hide body scroll, scroll via wrapper */
     -webkit-font-smoothing: antialiased;
+}
+
+/* PARALLAX ENGINE */
+.parallax-wrapper {
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 10px;
+    position: relative;
+}
+
+.parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform-origin: center center;
+}
+
+.parallax-layer-back {
+    transform: translateZ(-10px) scale(2);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.parallax-layer-mid {
+    transform: translateZ(0);
+    z-index: 2;
+    position: relative;
 }
 
 /* Ambient Background */
@@ -181,11 +211,11 @@ p {
 
 #navbar.scrolled {
     padding: 12px 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid var(--border-light);
-    box-shadow: var(--shadow-sm);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
 .nav-container {
@@ -303,9 +333,10 @@ p {
 }
 
 .section-bg {
-    background-color: var(--bg-secondary);
-    border-top: 1px solid var(--border-light);
-    border-bottom: 1px solid var(--border-light);
+    background-color: rgba(243, 244, 243, 0.4);
+    border-top: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
 }
 
 .section-header {
@@ -329,20 +360,22 @@ p {
 }
 
 .card {
-    background: var(--bg-primary);
-    border: 1px solid var(--border-light);
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
     padding: 40px;
-    transition: var(--transition);
-    box-shadow: var(--shadow-sm);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
     position: relative;
     z-index: 2;
 }
 
 .card:hover {
-    border-color: var(--accent);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
+    border-color: rgba(85, 107, 47, 0.4);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px 0 rgba(85, 107, 47, 0.12);
 }
 
 .card-icon {
@@ -701,20 +734,22 @@ footer {
 }
 
 .mini-app-card {
-    background: var(--bg-primary);
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
     overflow: hidden;
-    transition: var(--transition);
-    box-shadow: var(--shadow-sm);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
 }
 
 .mini-app-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--accent);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px 0 rgba(85, 107, 47, 0.15);
+    border-color: rgba(85, 107, 47, 0.4);
 }
 
 .mini-app-screenshot {

@@ -1,9 +1,12 @@
 // Twirwaneho Tech - App Interactivity logic
 
+const scrollContainer = document.querySelector('.parallax-wrapper') || window;
+
 // 1. Navigation Scrolled State
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
+scrollContainer.addEventListener('scroll', () => {
+    const scrollPos = scrollContainer === window ? window.scrollY : scrollContainer.scrollTop;
+    if (scrollPos > 20) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
@@ -50,6 +53,7 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, {
+    root: scrollContainer === window ? null : scrollContainer,
     threshold: 0.1,
     rootMargin: "0px 0px -50px 0px"
 });
@@ -70,10 +74,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                  navLinks.classList.remove('active');
              }
 
-            window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-            });
+            const offsetTop = targetElement.offsetTop;
+            if (scrollContainer === window) {
+                window.scrollTo({
+                    top: offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            } else {
+                scrollContainer.scrollTo({
+                    top: offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
         }
     });
 });
